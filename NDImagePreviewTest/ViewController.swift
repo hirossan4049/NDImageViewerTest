@@ -14,12 +14,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         imageBtn.imageView?.layer.cornerRadius = 15
+        imageBtn.imageView?.clipsToBounds = true
+        imageBtn.imageView?.contentMode = .scaleAspectFill
+        
+
     }
     
     @IBAction func btn(){
         let vc = NDImagePreviewViewController()
         vc.transitionImageView = imageBtn.frame
-        vc.modalPresentationStyle = .fullScreen
+        vc.backImg = imageBtn.imageView
+        vc.modalPresentationStyle = .overCurrentContext
         present(vc, animated: false)
     }
     

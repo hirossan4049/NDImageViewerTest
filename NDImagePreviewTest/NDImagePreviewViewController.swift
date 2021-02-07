@@ -17,6 +17,29 @@ class NDImagePreviewViewController: UIViewController {
     var imagePack: UIView!
     
     var backImg: UIImageView?
+
+    lazy var headView: UIView = {
+        let view = NDImagePreviewHeaderDefaultView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100))
+        view.delegate = self
+        return view
+    }()
+//    var headView: UIView{
+//        var crapview = UIView()
+//        crapview.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 100)
+//        crapview.backgroundColor = .blue
+////        view.addSubview(crapview)
+//        return crapview
+//    }
+    
+    var isHeadViewHidden: Bool = true{
+        didSet{
+            if isHeadViewHidden{
+                self.isHeadViewHiddenFn(true)
+            }else{
+                self.isHeadViewHiddenFn(false)
+            }
+        }
+    }
     
 //    override var prefersStatusBarHidden: Bool {
 //        return true
@@ -24,6 +47,9 @@ class NDImagePreviewViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        headView = UIView()
+//        headView.backgroundColor = .blue
         
         imageView = UIImageView()
         imageView.image = UIImage(named: "geohot")
@@ -63,8 +89,12 @@ class NDImagePreviewViewController: UIViewController {
 //        scrollView.contentInset.bottom = imageView.frame.origin.y + 30
         
         scrollView.addSubview(imageView)
-//        self.view.addSubview(scrollView)
-        self.view = scrollView
+        
+        scrollView.frame = UIScreen.main.bounds
+
+        self.view.backgroundColor = .none
+        self.view.addSubview(scrollView)
+//        self.view = scrollView
         
 //        self.view.backgroundColor = .red
         scrollView.backgroundColor = .none
@@ -97,15 +127,13 @@ class NDImagePreviewViewController: UIViewController {
         backImg?.alpha = 0
         print("viewDidAppler",self.transitionImageView)
         
-//        let crapview = UIView()
-//        crapview.frame = transitionImageView
-//        crapview.backgroundColor = .blue
-//        view.addSubview(crapview)
         
         animation()
     }
     
     @objc func imageTap(sender: UITapGestureRecognizer){
+//        isHeadViewHidden(false)
+        isHeadViewHidden = !isHeadViewHidden
         print("tapped")
     }
     
@@ -140,6 +168,14 @@ class NDImagePreviewViewController: UIViewController {
         sender.setTranslation(CGPoint.zero, in:view)
         
     }
+    
+    func isHeadViewHiddenFn(_ isHidden: Bool){
+        if isHidden{
+            headView.removeFromSuperview()
+        }else{
+            view.addSubview(headView)
+        }
+    }
 
 
     func animation(){
@@ -156,8 +192,6 @@ class NDImagePreviewViewController: UIViewController {
         
         let height = ratio * self.view.frame.width
 //        let scaleheight = self.scrollView.frame.height - height
-        
-        
         UIView.animate(withDuration: 0.3, delay: 0, options: [.allowAnimatedContent], animations: {
             self.imageView.frame.size.width += scalewidth
 //            self.imageView.frame.size.height += scaleheight
@@ -209,15 +243,11 @@ class NDImagePreviewViewController: UIViewController {
     }
     
     func closeAnimation(){
-        print("CLOSEanimation", self.transitionImageView)
-        print("imageViewFrame", self.imageView.frame)
         self.backImg?.backgroundColor = .red
         self.imageView.backgroundColor = .blue
         self.imageView.contentMode = .scaleAspectFill
         
-        let yyy = self.transitionImageView.origin.y - self.imageView.frame.origin.y
-        
-        print("conver!?", self.view.convert(self.view.frame, to: imageView))
+        scrollView.setZoomScale(1.0, animated: true)
         
         UIView.animate(withDuration: 0.3, delay: 0, options: [.allowAnimatedContent], animations: {
             self.imageView.frame = self.transitionImageView
@@ -226,9 +256,7 @@ class NDImagePreviewViewController: UIViewController {
             self.scrollView.contentInset = .zero
             
 //            self.backImg?.frame = self.transitionImageView
-            
-//            self.imageView.frame.origin.y = yyy
-            
+                        
             self.scrollView.backgroundColor = .none
 //            self.backImg?.alpha = 1
         }, completion: {_ in

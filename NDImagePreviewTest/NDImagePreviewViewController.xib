@@ -17,29 +17,8 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NDImagePreview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4T-Qb-qma">
-                    <rect key="frame" x="141.5" y="437.5" width="131" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s9g-Ny-ypb">
-                    <rect key="frame" x="173.5" y="76" width="67" height="30"/>
-                    <state key="normal" title="animation"/>
-                    <connections>
-                        <action selector="prs" destination="-1" eventType="touchUpInside" id="HPz-aC-ihm"/>
-                    </connections>
-                </button>
-            </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-            <constraints>
-                <constraint firstItem="a4T-Qb-qma" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="H2z-vh-0T3"/>
-                <constraint firstItem="s9g-Ny-ypb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Lio-Ji-k3N"/>
-                <constraint firstItem="a4T-Qb-qma" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="k7W-l4-pYz"/>
-                <constraint firstItem="s9g-Ny-ypb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="32" id="kxf-Dt-t9t"/>
-            </constraints>
             <point key="canvasLocation" x="97" y="109"/>
         </view>
     </objects>

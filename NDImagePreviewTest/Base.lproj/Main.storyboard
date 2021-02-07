@@ -16,27 +16,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q5Z-7d-tt5">
-                                <rect key="frame" x="144.5" y="377.5" width="125" height="141"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ug6-xB-VkF">
+                                <rect key="frame" x="57" y="178" width="300" height="141"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="125" id="3L5-fI-sWM"/>
-                                    <constraint firstAttribute="height" constant="141" id="OxF-kM-kxU"/>
+                                    <constraint firstAttribute="width" constant="300" id="XFl-pz-CPN"/>
+                                    <constraint firstAttribute="height" constant="141" id="jpJ-fD-MBb"/>
                                 </constraints>
-                                <state key="normal" image="image1"/>
+                                <state key="normal" image="geohot"/>
                                 <connections>
-                                    <action selector="btn" destination="BYZ-38-t0r" eventType="touchUpInside" id="V3N-g7-ULd"/>
+                                    <action selector="btn" destination="BYZ-38-t0r" eventType="touchUpInside" id="bRq-7g-Yui"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NDImagePreview" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpT-cv-n0h">
+                                <rect key="frame" x="89" y="108" width="236" height="38"/>
+                                <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Q5Z-7d-tt5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6nC-4O-sAg"/>
-                            <constraint firstItem="Q5Z-7d-tt5" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="DPm-hd-ryq"/>
+                            <constraint firstItem="ug6-xB-VkF" firstAttribute="top" secondItem="KpT-cv-n0h" secondAttribute="bottom" constant="32" id="DoH-6o-bfX"/>
+                            <constraint firstItem="ug6-xB-VkF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Mqw-tx-RKw"/>
+                            <constraint firstItem="KpT-cv-n0h" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="64" id="kKL-d7-K7k"/>
+                            <constraint firstItem="KpT-cv-n0h" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tUX-hl-Hy6"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="imageBtn" destination="Q5Z-7d-tt5" id="F1T-kX-1AP"/>
+                        <outlet property="imageBtn" destination="ug6-xB-VkF" id="fEe-cn-a0s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -45,7 +53,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="image1" width="1040" height="1300"/>
+        <image name="geohot" width="543" height="604"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
