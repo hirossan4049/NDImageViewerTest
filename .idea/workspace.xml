@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f9f6156f-a98c-4d8e-bd68-efba37766bff" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/xcuserdata/craptone.xcuserdatad/xcschemes/NDImagePreviewTest.xcscheme" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest/Assets.xcassets/geohot.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest/Assets.xcassets/geohot.imageset/geohot.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest/Assets.xcassets/image2.imageset/BK-NM-10557.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest/Assets.xcassets/image2.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest/Assets.xcassets/image3.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest/Assets.xcassets/image3.imageset/curiosity_selfie.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest/HeaderView.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/project.xcworkspace/xcuserdata/craptone.xcuserdatad/UserInterfaceState.xcuserstate" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/project.xcworkspace/xcuserdata/craptone.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/xcuserdata/craptone.xcuserdatad/xcschemes/xcschememanagement.plist" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/xcuserdata/craptone.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NDImagePreviewTest/Base.lproj/Main.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest/Base.lproj/Main.storyboard" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NDImagePreviewTest/NDImagePreviewViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest/NDImagePreviewViewController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NDImagePreviewTest/NDImagePreviewViewController.xib" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest/NDImagePreviewViewController.xib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NDImagePreviewTest/ViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest/ViewController.swift" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="iphonesimulator_BECB4881-A4B8-4CC3-95B3-1DDED6F956F3" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1njykbSwNulKJgQSWAmkSba6i10" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
+  </component>
+  <component name="RunManager">
+    <configuration name="NDImagePreviewTest" type="AppleRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="NDImagePreviewTest" TARGET_NAME="NDImagePreviewTest" CONFIG_NAME="Debug" SCHEME_NAME="NDImagePreviewTest" IS_LOCATION_SIMULATION_ALLOWED="true" APPLICATION_LANGUAGE="IDELaunchSchemeLanguageUseSystemLanguage" APPLICATION_REGION="" RUN_TARGET_PROJECT_NAME="NDImagePreviewTest" RUN_TARGET_NAME="NDImagePreviewTest" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+      <embedded_app_extension_list />
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f9f6156f-a98c-4d8e-bd68-efba37766bff" name="Default Changelist" comment="" />
+      <created>1611917942237</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1611917942237</updated>
+      <workItem from="1611917944323" duration="912000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
