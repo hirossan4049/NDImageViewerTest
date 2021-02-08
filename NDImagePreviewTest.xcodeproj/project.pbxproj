@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E94D01C025D01CA700BC5F66 /* NDImagePreviewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94D01BF25D01CA700BC5F66 /* NDImagePreviewHeaderView.swift */; };
+		E94D01C425D0471D00BC5F66 /* NDImagePreviewHeaderDefaultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E94D01C325D0471D00BC5F66 /* NDImagePreviewHeaderDefaultView.xib */; };
 		E9A7609225BA5ADA008F8E11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A7609125BA5ADA008F8E11 /* AppDelegate.swift */; };
 		E9A7609425BA5ADA008F8E11 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A7609325BA5ADA008F8E11 /* SceneDelegate.swift */; };
 		E9A7609625BA5ADA008F8E11 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A7609525BA5ADA008F8E11 /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		E94D01BF25D01CA700BC5F66 /* NDImagePreviewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NDImagePreviewHeaderView.swift; sourceTree = "<group>"; };
+		E94D01C325D0471D00BC5F66 /* NDImagePreviewHeaderDefaultView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NDImagePreviewHeaderDefaultView.xib; sourceTree = "<group>"; };
 		E9A7608E25BA5ADA008F8E11 /* NDImagePreviewTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NDImagePreviewTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9A7609125BA5ADA008F8E11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9A7609325BA5ADA008F8E11 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				E94D01BF25D01CA700BC5F66 /* NDImagePreviewHeaderView.swift */,
+				E94D01C325D0471D00BC5F66 /* NDImagePreviewHeaderDefaultView.xib */,
 				E9A760A625BA5AFC008F8E11 /* NDImagePreviewViewController.swift */,
 				E9A760A725BA5AFC008F8E11 /* NDImagePreviewViewController.xib */,
 				E9A760AB25BA5B01008F8E11 /* NDImagePreview */,
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9A7609E25BA5ADC008F8E11 /* LaunchScreen.storyboard in Resources */,
+				E94D01C425D0471D00BC5F66 /* NDImagePreviewHeaderDefaultView.xib in Resources */,
 				E9A7609B25BA5ADC008F8E11 /* Assets.xcassets in Resources */,
 				E9A760A925BA5AFC008F8E11 /* NDImagePreviewViewController.xib in Resources */,
 				E9A7609925BA5ADA008F8E11 /* Main.storyboard in Resources */,

@@ -19,7 +19,9 @@ class NDImagePreviewViewController: UIViewController {
     var backImg: UIImageView?
 
     lazy var headView: UIView = {
-        let view = NDImagePreviewHeaderDefaultView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100))
+        let view = NDImagePreviewHeaderDefaultView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIApplication.shared.statusBarFrame.height + 50))
+        view.backgroundColor = .red
+        view.alpha = 0.9
         view.delegate = self
         return view
     }()
@@ -146,21 +148,24 @@ class NDImagePreviewViewController: UIViewController {
 //            return
 //        }
         if sender.state == .ended{
-//            let saX = sender.view!.center.x - view.center.x
-//            let saY = sender.view!.center.y - view.center.y
-            let saX = imageView!.center.x - view.center.x
-            let saY = imageView!.center.y - view.center.y
+            let saX = sender.view!.center.x - view.center.x
+            let saY = sender.view!.center.y - view.center.y
+//            let saX = imageView!.center.x - view.center.x
+//            let saY = imageView!.center.y - view.center.y
             if abs(saX) > 30 || abs(saY) > 30{
 //                myImage.animate( .fill, frame: imageframe, duration: 0.4)
                 closeAnimation()
             }else{
                 imageView.backgroundColor = .black
-                imageView.center = view.center
+                self.scrollView.backgroundColor = .black
+//                imageView.center = view.center
+                updateScrollInset()
             }
         
             return
         }
-        imageView.backgroundColor = .none
+        self.scrollView.backgroundColor = .none
+        isHeadViewHidden = true
         imageView.center.x += move.x
         imageView.center.y += move.y
         view.layoutIfNeeded()
@@ -171,9 +176,18 @@ class NDImagePreviewViewController: UIViewController {
     
     func isHeadViewHiddenFn(_ isHidden: Bool){
         if isHidden{
-            headView.removeFromSuperview()
-        }else{
             view.addSubview(headView)
+            UIView.animate(withDuration: 0.1, animations: {
+                self.headView.frame.origin.y = -self.headView.frame.height
+            }, completion: {_ in
+                self.headView.removeFromSuperview()
+            })
+        }else{
+            headView.frame.origin.y -= headView.frame.height
+            view.addSubview(headView)
+            UIView.animate(withDuration: 0.1, animations: {
+                self.headView.frame.origin.y = 0
+            })
         }
     }
 
@@ -248,6 +262,7 @@ class NDImagePreviewViewController: UIViewController {
         self.imageView.contentMode = .scaleAspectFill
         
         scrollView.setZoomScale(1.0, animated: true)
+        isHeadViewHidden = true
         
         UIView.animate(withDuration: 0.3, delay: 0, options: [.allowAnimatedContent], animations: {
             self.imageView.frame = self.transitionImageView

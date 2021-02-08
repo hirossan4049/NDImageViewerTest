@@ -7,33 +7,39 @@
 
 import UIKit
 
+//@IBDesignable
 class NDImagePreviewHeaderDefaultView: NDImagePreviewHeaderView {
-    lazy var exitBtn: UIButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(systemName: "xmark"), for: .normal)
-        btn.tintColor = .white
-        btn.addTarget(self, action: #selector(self.exit),
-                                     for: .touchUpInside)
-        return btn
-    }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        exitBtn.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(exitBtn)
-        
+//        addSubview(exitBtn)
+        self.frame = frame
+        loadNib()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+    }
+    
+    @IBAction func exitBtn(){
+        self.exit()
+    }
+    
+    func loadNib(){
+        let bundle = Bundle(for: type(of: self))
+        let nib = UINib(nibName: "NDImagePreviewHeaderDefaultView", bundle: bundle)
+        let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
+        view.frame = frame
+        self.addSubview(view)
     }
     
     override func layoutSubviews() {
-        // レイアウトの設定
-        exitBtn.frame = self.frame
+
 
 
     }
+    
 }
 
 
