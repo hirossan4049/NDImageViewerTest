@@ -17,14 +17,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ug6-xB-VkF">
-                                <rect key="frame" x="57" y="178" width="300" height="141"/>
+                                <rect key="frame" x="132" y="178" width="150" height="150"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="XFl-pz-CPN"/>
-                                    <constraint firstAttribute="height" constant="141" id="jpJ-fD-MBb"/>
+                                    <constraint firstAttribute="width" constant="150" id="XFl-pz-CPN"/>
+                                    <constraint firstAttribute="height" constant="150" id="jpJ-fD-MBb"/>
                                 </constraints>
                                 <state key="normal" image="geohot"/>
                                 <connections>
-                                    <action selector="btn" destination="BYZ-38-t0r" eventType="touchUpInside" id="bRq-7g-Yui"/>
+                                    <action selector="imagetapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XCX-MQ-x65"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NDImagePreview" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpT-cv-n0h">
@@ -33,17 +33,31 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x1n-Ju-o4P">
+                                <rect key="frame" x="107" y="360" width="200" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="T2l-PS-u17"/>
+                                    <constraint firstAttribute="width" constant="200" id="rzE-Ca-XBx"/>
+                                </constraints>
+                                <state key="normal" image="image4"/>
+                                <connections>
+                                    <action selector="imagetapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ub1-Kc-HZX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="x1n-Ju-o4P" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="39u-1Z-hPJ"/>
                             <constraint firstItem="ug6-xB-VkF" firstAttribute="top" secondItem="KpT-cv-n0h" secondAttribute="bottom" constant="32" id="DoH-6o-bfX"/>
+                            <constraint firstItem="x1n-Ju-o4P" firstAttribute="top" secondItem="ug6-xB-VkF" secondAttribute="bottom" constant="32" id="I1T-Hm-Ktm"/>
                             <constraint firstItem="ug6-xB-VkF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Mqw-tx-RKw"/>
                             <constraint firstItem="KpT-cv-n0h" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="64" id="kKL-d7-K7k"/>
                             <constraint firstItem="KpT-cv-n0h" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tUX-hl-Hy6"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="image2Btn" destination="x1n-Ju-o4P" id="pNx-Va-Va2"/>
                         <outlet property="imageBtn" destination="ug6-xB-VkF" id="fEe-cn-a0s"/>
                     </connections>
                 </viewController>
@@ -54,6 +68,7 @@
     </scenes>
     <resources>
         <image name="geohot" width="543" height="604"/>
+        <image name="image4" width="3072" height="2048"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

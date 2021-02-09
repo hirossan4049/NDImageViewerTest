@@ -201,7 +201,9 @@ class NDImagePreviewViewController: UIViewController {
 
         let ratio = self.imageView.image!.size.width / self.imageView.image!.size.height
 
-        let height = ratio * self.view.frame.width
+//        let height = ratio * self.view.frame.width
+        let height = AVMakeRect(aspectRatio: imageView.image!.size, insideRect: self.scrollView.bounds).size.height
+        print("height", height)
 //        let scaleheight = self.scrollView.frame.height - height
         UIView.animate(withDuration: 0.3, delay: 0, options: [.allowAnimatedContent], animations: {
             self.imageView.frame.size.width += scalewidth
@@ -229,7 +231,7 @@ class NDImagePreviewViewController: UIViewController {
 //            self.scrollView.contentInset = .zero
 //            self.updateScrollInset()
 //            self.imageView.frame = self.scrollView.frame
-//            self.imageView.contentMode = .scaleAspectFit
+            self.imageView.contentMode = .scaleAspectFit
 //            self.scrollView.frame.size.height -= self.imageView.frame.origin.y
 
         })
@@ -464,8 +466,159 @@ extension UIColor {
         var blue: CGFloat = 1.0
         var alpha: CGFloat = 1.0
         self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-
+        
         return UIColor(red: red, green: green, blue: blue, alpha: a)
     }
 
 }
+
+// MARK: Aspect Extension
+extension UIImageView {
+
+    private var aspectFitSize: CGSize? {
+        get {
+            guard let aspectRatio = image?.size else { return nil }
+            let widthRatio = bounds.width / aspectRatio.width
+            let heightRatio = bounds.height / aspectRatio.height
+            let ratio = (widthRatio > heightRatio) ? heightRatio : widthRatio
+            let resizedWidth = aspectRatio.width * ratio
+            let resizedHeight = aspectRatio.height * ratio
+            let aspectFitSize = CGSize(width: resizedWidth, height: resizedHeight)
+            return aspectFitSize
+        }
+    }
+
+    var aspectFitFrame: CGRect? {
+        get {
+            guard let size = aspectFitSize else { return nil }
+            return CGRect(origin: CGPoint(x: frame.origin.x + (bounds.size.width - size.width) * 0.5, y: frame.origin.y + (bounds.size.height - size.height) * 0.5), size: size)
+        }
+    }
+
+    var aspectFitBounds: CGRect? {
+        get {
+            guard let size = aspectFitSize else { return nil }
+            return CGRect(origin: CGPoint(x: bounds.size.width * 0.5 - size.width * 0.5, y: bounds.size.height * 0.5 - size.height * 0.5), size: size)
+        }
+    }
+
+    private var aspectFillSize: CGSize? {
+        get {
+            guard let aspectRatio = image?.size else { return nil }
+            let widthRatio = bounds.width / aspectRatio.width
+            let heightRatio = bounds.height / aspectRatio.height
+            let ratio = (widthRatio < heightRatio) ? heightRatio : widthRatio
+            let resizedWidth = aspectRatio.width * ratio
+            let resizedHeight = aspectRatio.height * ratio
+            let aspectFitSize = CGSize(width: resizedWidth, height: resizedHeight)
+            return aspectFitSize
+        }
+    }
+
+    var aspectFillFrame: CGRect? {
+        get {
+            guard let size = aspectFillSize else { return nil }
+            return CGRect(origin: CGPoint(x: frame.origin.x - (size.width - bounds.size.width) * 0.5, y: frame.origin.y - (size.height - bounds.size.height) * 0.5), size: size)
+        }
+    }
+
+    var aspectFillBounds: CGRect? {
+        get {
+            guard let size = aspectFillSize else { return nil }
+            return CGRect(origin: CGPoint(x: bounds.origin.x - (size.width - bounds.size.width) * 0.5, y: bounds.origin.y - (size.height - bounds.size.height) * 0.5), size: size)
+        }
+    }
+
+    func imageFrame(_ contentMode: UIView.ContentMode) -> CGRect? {
+        guard let image = image else { return nil }
+        switch contentMode {
+        case .scaleToFill, .redraw:
+            return frame
+        case .scaleAspectFit:
+            return aspectFitFrame
+        case .scaleAspectFill:
+            return aspectFillFrame
+        case .center:
+            let x = frame.origin.x - (image.size.width - bounds.size.width) * 0.5
+            let y = frame.origin.y - (image.size.height - bounds.size.height) * 0.5
+            return CGRect(origin: CGPoint(x: x, y: y), size: image.size)
+        case .topLeft:
+            return CGRect(origin: frame.origin, size: image.size)
+        case .top:
+            let x = frame.origin.x - (image.size.width - bounds.size.width) * 0.5
+            let y = frame.origin.y
+            return CGRect(origin: CGPoint(x: x, y: y), size: image.size)
+        case .topRight:
+            let x = frame.origin.x - (image.size.width - bounds.size.width)
+            let y = frame.origin.y
+            return CGRect(origin: CGPoint(x: x, y: y), size: image.size)
+        case .right:
+            let x = frame.origin.x - (image.size.width - bounds.size.width)
+            let y = frame.origin.y - (image.size.height - bounds.size.height) * 0.5
+            return CGRect(origin: CGPoint(x: x, y: y), size: image.size)
+        case .bottomRight:
+            let x = frame.origin.x - (image.size.width - bounds.size.width)
+            let y = frame.origin.y + (bounds.size.height - image.size.height)
+            return CGRect(origin: CGPoint(x: x, y: y), size: image.size)
+        case .bottom:
+            let x = frame.origin.x - (image.size.width - bounds.size.width) * 0.5
+            let y = frame.origin.y + (bounds.size.height - image.size.height)
+            return CGRect(origin: CGPoint(x: x, y: y), size: image.size)
+        case .bottomLeft:
+            let x = frame.origin.x
+            let y = frame.origin.y + (bounds.size.height - image.size.height)
+            return CGRect(origin: CGPoint(x: x, y: y), size: image.size)
+        case .left:
+            let x = frame.origin.x
+            let y = frame.origin.y - (image.size.height - bounds.size.height) * 0.5
+            return CGRect(origin: CGPoint(x: x, y: y), size: image.size)
+        }
+    }
+
+    func imageBounds(_ contentMode: UIView.ContentMode) -> CGRect? {
+        guard let image = image else { return nil }
+        switch contentMode {
+        case .scaleToFill, .redraw:
+            return bounds
+        case .scaleAspectFit:
+            return aspectFitBounds
+        case .scaleAspectFill:
+            return aspectFillBounds
+        case .center:
+            let x = bounds.size.width * 0.5 - image.size.width * 0.5
+            let y = bounds.size.height * 0.5 - image.size.height * 0.5
+            return CGRect(origin: CGPoint(x: x, y: y), size: image.size)
+        case .topLeft:
+            return CGRect(origin: CGPoint.zero, size: image.size)
+        case .top:
+            let x = bounds.size.width * 0.5 - image.size.width * 0.5
+            let y: CGFloat = 0
+            return CGRect(origin: CGPoint(x: x, y: y), size: image.size)
+        case .topRight:
+            let x = bounds.size.width - image.size.width
+            let y: CGFloat = 0
+            return CGRect(origin: CGPoint(x: x, y: y), size: image.size)
+        case .right:
+            let x = bounds.size.width - image.size.width
+            let y = bounds.size.height * 0.5 - image.size.height * 0.5
+            return CGRect(origin: CGPoint(x: x, y: y), size: image.size)
+        case .bottomRight:
+            let x = bounds.size.width - image.size.width
+            let y = bounds.size.height - image.size.height
+            return CGRect(origin: CGPoint(x: x, y: y), size: image.size)
+        case .bottom:
+            let x = bounds.size.width * 0.5 - image.size.width * 0.5
+            let y = bounds.size.height - image.size.height
+            return CGRect(origin: CGPoint(x: x, y: y), size: image.size)
+        case .bottomLeft:
+            let x: CGFloat = 0
+            let y = bounds.size.height - image.size.height
+            return CGRect(origin: CGPoint(x: x, y: y), size: image.size)
+        case .left:
+            let x: CGFloat = 0
+            let y = bounds.size.height * 0.5 - image.size.height * 0.5
+            return CGRect(origin: CGPoint(x: x, y: y), size: image.size)
+        }
+    }
+}
+

@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9f6156f-a98c-4d8e-bd68-efba37766bff" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest/Assets.xcassets/image4.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest/Assets.xcassets/image4.imageset/pexels-spencer-selover-428382.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/project.pbxproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/project.xcworkspace/xcuserdata/craptone.xcuserdatad/UserInterfaceState.xcuserstate" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/project.xcworkspace/xcuserdata/craptone.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NDImagePreviewTest/NDImagePreviewHeaderView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest/NDImagePreviewHeaderView.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NDImagePreviewTest/Base.lproj/Main.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest/Base.lproj/Main.storyboard" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NDImagePreviewTest/NDImagePreviewViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest/NDImagePreviewViewController.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NDImagePreviewTest/ViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest/ViewController.swift" afterDir="false" />
     </list>
@@ -56,7 +57,7 @@
       <option name="presentableId" value="Default" />
       <updated>1611917942237</updated>
       <workItem from="1611917944323" duration="912000" />
-      <workItem from="1612833408990" duration="1169000" />
+      <workItem from="1612833408990" duration="1483000" />
     </task>
     <servers />
   </component>
