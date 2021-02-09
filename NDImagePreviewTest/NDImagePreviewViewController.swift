@@ -2,7 +2,7 @@
 //  NDImagePreviewViewController.swift
 //  NDImagePreviewTest
 //
-//  Created by craptone on 2021/01/22.
+//  Created by NDSLib on 2021/01/22.
 //
 
 import UIKit
@@ -15,7 +15,6 @@ class NDImagePreviewViewController: UIViewController {
     var scrollView: UIScrollView!
     var dragGesture: UIPanGestureRecognizer!
     var isZoomLock = false
-    var imagePack: UIView!
 
     var backImg: UIImageView?
 
@@ -24,13 +23,7 @@ class NDImagePreviewViewController: UIViewController {
         view.delegate = self
         return view
     }()
-//    var headView: UIView{
-//        var crapview = UIView()
-//        crapview.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 100)
-//        crapview.backgroundColor = .blue
-////        view.addSubview(crapview)
-//        return crapview
-//    }
+
 
     var isHeadViewHidden: Bool = true {
         didSet {
@@ -49,38 +42,23 @@ class NDImagePreviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        headView = UIView()
-//        headView.backgroundColor = .blue
-
         transitionImageViewFrame = self.backImg!.superview!.convert(self.backImg!.frame, to: nil)
 
         imageView = UIImageView()
-//        imageView.image = UIImage(named: "geohot")
         imageView.image = backImg!.image
         imageView.frame = transitionImageViewFrame
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 15
+        imageView.layer.cornerRadius = backImg!.layer.cornerRadius
         imageView.backgroundColor = .none
         imageView.isUserInteractionEnabled = true
-//        imageView.frame = AVMakeRect(aspectRatio: imageView.image!.size, insideRect: imageView.bounds)
-
-        imagePack = UIView()
-        imagePack.frame = view.frame
 
         dragGesture = UIPanGestureRecognizer(target: self, action: #selector(asahaPan))
-//        imageView.panGesture = dragGesture
         imageView.addGestureRecognizer(dragGesture)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTap))
         imageView.addGestureRecognizer(tapGesture)
 
-        imagePack.backgroundColor = .none
-//        imagePack.addSubview(imageView)
-
-
-//        view.addSubview(imageView)
         scrollView = UIScrollView(frame: view.bounds)
-//        scrollView.frame = view.frame
 
         scrollView.delegate = self
         scrollView.showsHorizontalScrollIndicator = false
@@ -88,43 +66,18 @@ class NDImagePreviewViewController: UIViewController {
         scrollView.minimumZoomScale = 1.0
         scrollView.maximumZoomScale = 4.0
         scrollView.contentSize = imageView.frame.size
-//        scrollView.contentInset = .zero
-//        scrollView.contentInset.top = -imageView.frame.origin.y
-//        scrollView.contentInset.bottom = imageView.frame.origin.y + 30
-
         scrollView.addSubview(imageView)
-
         scrollView.frame = UIScreen.main.bounds
 
         self.view.backgroundColor = .none
         self.view.addSubview(scrollView)
-//        self.view = scrollView
 
-//        self.view.backgroundColor = .red
         scrollView.backgroundColor = .none
-//        self.view.backgroundColor?.withAlphaComponent(0)
-        self.scrollView.backgroundColor?.withAlphaComponent(0)
 
         setupGesture()
 
 
     }
-
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        if let size = imageView.image?.size {
-//            // imageViewのサイズがscrollView内に収まるように調整
-//            let wrate = scrollView.frame.width / size.width
-//            let hrate = scrollView.frame.height / size.height
-//            let rate = min(wrate, hrate, 1)
-//            imageView.frame.size = CGSize(width: size.width * rate, height: size.height * rate)
-//
-//            // contentSizeを画像サイズに設定
-//            scrollView.contentSize = imageView.frame.size
-//            // 初期表示のためcontentInsetを更新
-//            updateScrollInset()
-//        }
-//    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -133,40 +86,47 @@ class NDImagePreviewViewController: UIViewController {
     }
 
     @objc func imageTap(sender: UITapGestureRecognizer) {
-//        isHeadViewHidden(false)
         isHeadViewHidden = !isHeadViewHidden
-        print("tapped")
     }
 
     @objc func asahaPan(sender: UIPanGestureRecognizer) {
         let move: CGPoint = sender.translation(in: view)
+        
+        if sender.state == .began {
+            isHeadViewHidden = true
 
-        if sender.state == .ended {
+            scrollView.minimumZoomScale = 0.85
+            self.imageView.layer.cornerRadius = 100
+            self.imageView.backgroundColor = .red
+            UIView.animate(withDuration: 0.15, animations: {
+                self.scrollView.backgroundColor = .none
+                self.scrollView.setZoomScale(0.85, animated: false)
+            })
+            
+        }else if sender.state == .ended {
             let imgCntr = self.imageView!.superview!.convert(self.imageView!.frame, to: nil).center
             let saX = imgCntr.x - scrollView.center.x
             let saY = imgCntr.y - scrollView.center.y
 
             if abs(saX) > 30 || abs(saY) > 30 {
-//                myImage.animate( .fill, frame: imageframe, duration: 0.4)
                 closeAnimation()
             } else {
-                imageView.backgroundColor = .black
-                self.scrollView.backgroundColor = .black
-//                imageView.center = view.center
+                scrollView.minimumZoomScale = 1
+                UIView.animate(withDuration: 0.15, animations: {
+                    self.scrollView.backgroundColor = .black
+                    self.scrollView.setZoomScale(1, animated: false)
+                })
                 self.imageView.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.width, height: self.imageView.frame.height)
                 updateScrollInset()
             }
 
             return
         }
-        self.scrollView.backgroundColor = .none
-        isHeadViewHidden = true
+        
         imageView.center.x += move.x
         imageView.center.y += move.y
-//        scrollView.minimumZoomScale = 0.9
-//        scrollView.setZoomScale(0.9, animated: false)
-        view.layoutIfNeeded()
 
+        view.layoutIfNeeded()
         sender.setTranslation(CGPoint.zero, in: view)
 
     }
@@ -190,56 +150,21 @@ class NDImagePreviewViewController: UIViewController {
 
 
     func animation() {
-//        let scalewidth = self.view.frame.width - transitionImageViewFrame.width
-//        let scaleheight = self.view.frame.height - transitionImageViewFrame.height
-
         let scalewidth = self.scrollView.frame.width - transitionImageViewFrame.width
-//        let scaleheight = self.scrollView.frame.height - transitionImageViewFrame.height
-//        let scalex = self.view.frame.origin.x - transitionImageViewFrame.origin.x
-//        let scaley = self.view.frame.origin.y - transitionImageViewFrame.origin.y
-//        curveLinear
 
-        let ratio = self.imageView.image!.size.width / self.imageView.image!.size.height
-
-//        let height = ratio * self.view.frame.width
         let height = AVMakeRect(aspectRatio: imageView.image!.size, insideRect: self.scrollView.bounds).size.height
-        print("height", height)
-//        let scaleheight = self.scrollView.frame.height - height
         UIView.animate(withDuration: 0.3, delay: 0, options: [.allowAnimatedContent], animations: {
             self.imageView.frame.size.width += scalewidth
-//            self.imageView.frame.size.height += scaleheight
             self.imageView.frame.size.height = height
-//            self.imageView.frame.origin.x += scalex
-//            self.imageView.frame.origin.y += scaley
             self.imageView.frame.origin.x -= self.imageView.frame.origin.x
-//            self.imageView.frame.origin.y -= self.imageView.frame.origin.y
             self.imageView.center.y = self.scrollView.center.y
-//            self.imageView.contentMode = .scaleAspectFit
-
             self.scrollView.backgroundColor = .black
-
 
         }, completion: { _ in
             print("animated", self.imageView.frame)
             self.imageView.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.width, height: self.imageView.frame.height)
             self.updateContentInset()
-
-//            self.imageView.center.y = self.view.center.y
-
-
-//            self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//            self.scrollView.contentInset = .zero
-//            self.updateScrollInset()
-//            self.imageView.frame = self.scrollView.frame
-            self.imageView.contentMode = .scaleAspectFit
-//            self.scrollView.frame.size.height -= self.imageView.frame.origin.y
-
         })
-
-
-//        UIView.animate(withDuration: 5, delay: 7) {
-//            self.imageView.contentMode = .scaleAspectFit
-//        }
 
         let animation = CABasicAnimation(keyPath: "cornerRadius")
         animation.duration = 0.1
@@ -259,19 +184,13 @@ class NDImagePreviewViewController: UIViewController {
         self.imageView.backgroundColor = .blue
         self.imageView.contentMode = .scaleAspectFill
 
-        scrollView.setZoomScale(1.0, animated: true)
+        scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
         isHeadViewHidden = true
 
         UIView.animate(withDuration: 0.3, delay: 0, options: [.allowAnimatedContent], animations: {
             self.imageView.frame = self.transitionImageViewFrame
-//            self.view.frame.origin = CGPoint(x: 0, y: 0)
-
             self.scrollView.contentInset = .zero
-
-//            self.backImg?.frame = self.transitionImageViewFrame
-
             self.scrollView.backgroundColor = .none
-//            self.backImg?.alpha = 1
         }, completion: { _ in
             print("end", self.imageView.frame)
             self.backImg?.alpha = 1
@@ -281,7 +200,7 @@ class NDImagePreviewViewController: UIViewController {
         let animation = CABasicAnimation(keyPath: "cornerRadius")
         animation.duration = 0.1
         animation.fromValue = 0
-        animation.toValue = 15
+        animation.toValue = backImg!.layer.cornerRadius
         animation.beginTime = CACurrentMediaTime() + 0.2
         animation.autoreverses = false
         animation.isRemovedOnCompletion = false

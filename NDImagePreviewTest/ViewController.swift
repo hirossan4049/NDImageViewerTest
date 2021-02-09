@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         imageBtn.imageView?.clipsToBounds = true
         imageBtn.imageView?.contentMode = .scaleAspectFill
         
-        image2Btn.imageView?.layer.cornerRadius = 15
+        image2Btn.imageView?.layer.cornerRadius = 30
         image2Btn.imageView?.clipsToBounds = true
         image2Btn.imageView?.contentMode = .scaleAspectFill
         
