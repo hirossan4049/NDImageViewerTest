@@ -2,20 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9f6156f-a98c-4d8e-bd68-efba37766bff" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/xcuserdata/craptone.xcuserdatad/xcschemes/NDImagePreviewTest.xcscheme" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest/Assets.xcassets/geohot.imageset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest/Assets.xcassets/geohot.imageset/geohot.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest/Assets.xcassets/image2.imageset/BK-NM-10557.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest/Assets.xcassets/image2.imageset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest/Assets.xcassets/image3.imageset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest/Assets.xcassets/image3.imageset/curiosity_selfie.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest/HeaderView.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/project.xcworkspace/xcuserdata/craptone.xcuserdatad/UserInterfaceState.xcuserstate" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/project.xcworkspace/xcuserdata/craptone.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/xcuserdata/craptone.xcuserdatad/xcschemes/xcschememanagement.plist" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/xcuserdata/craptone.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NDImagePreviewTest/Base.lproj/Main.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest/Base.lproj/Main.storyboard" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NDImagePreviewTest/NDImagePreviewViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest/NDImagePreviewViewController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NDImagePreviewTest/NDImagePreviewViewController.xib" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest/NDImagePreviewViewController.xib" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NDImagePreviewTest/ViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest/ViewController.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,11 +13,12 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="iphonesimulator_BECB4881-A4B8-4CC3-95B3-1DDED6F956F3" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="iphonesimulator_5826998D-7DDC-4E8E-AFF9-8EB41E169F09" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1njykbSwNulKJgQSWAmkSba6i10" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -64,6 +55,7 @@
       <option name="presentableId" value="Default" />
       <updated>1611917942237</updated>
       <workItem from="1611917944323" duration="912000" />
+      <workItem from="1612833408990" duration="635000" />
     </task>
     <servers />
   </component>
@@ -80,5 +72,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
