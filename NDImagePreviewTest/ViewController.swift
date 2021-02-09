@@ -22,7 +22,6 @@ class ViewController: UIViewController {
     
     @IBAction func btn(){
         let vc = NDImagePreviewViewController()
-//        vc.transitionImageView = imageBtn.frame
         vc.backImg = imageBtn.imageView
         vc.modalPresentationStyle = .overCurrentContext
         present(vc, animated: false)

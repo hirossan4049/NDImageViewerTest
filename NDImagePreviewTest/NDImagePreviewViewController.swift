@@ -21,8 +21,6 @@ class NDImagePreviewViewController: UIViewController {
 
     lazy var headView: UIView = {
         let view = NDImagePreviewHeaderDefaultView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIApplication.shared.statusBarFrame.height + 50))
-        view.backgroundColor = .red
-        view.alpha = 0.9
         view.delegate = self
         return view
     }()
@@ -57,7 +55,8 @@ class NDImagePreviewViewController: UIViewController {
         transitionImageViewFrame = self.backImg!.superview!.convert(self.backImg!.frame, to: nil)
 
         imageView = UIImageView()
-        imageView.image = UIImage(named: "geohot")
+//        imageView.image = UIImage(named: "geohot")
+        imageView.image = backImg!.image
         imageView.frame = transitionImageViewFrame
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -141,17 +140,12 @@ class NDImagePreviewViewController: UIViewController {
 
     @objc func asahaPan(sender: UIPanGestureRecognizer) {
         let move: CGPoint = sender.translation(in: view)
-//        if myImage.isZoomLock{
-//            return
-//        }
-//        if imageView.contentMode == .scaleAspectFill{
-//            return
-//        }
+
         if sender.state == .ended {
-            let saX = sender.view!.center.x - view.center.x
-            let saY = sender.view!.center.y - view.center.y
-//            let saX = imageView!.center.x - view.center.x
-//            let saY = imageView!.center.y - view.center.y
+            let imgCntr = self.imageView!.superview!.convert(self.imageView!.frame, to: nil).center
+            let saX = imgCntr.x - scrollView.center.x
+            let saY = imgCntr.y - scrollView.center.y
+
             if abs(saX) > 30 || abs(saY) > 30 {
 //                myImage.animate( .fill, frame: imageframe, duration: 0.4)
                 closeAnimation()
@@ -159,6 +153,7 @@ class NDImagePreviewViewController: UIViewController {
                 imageView.backgroundColor = .black
                 self.scrollView.backgroundColor = .black
 //                imageView.center = view.center
+                self.imageView.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.width, height: self.imageView.frame.height)
                 updateScrollInset()
             }
 
@@ -168,6 +163,8 @@ class NDImagePreviewViewController: UIViewController {
         isHeadViewHidden = true
         imageView.center.x += move.x
         imageView.center.y += move.y
+//        scrollView.minimumZoomScale = 0.9
+//        scrollView.setZoomScale(0.9, animated: false)
         view.layoutIfNeeded()
 
         sender.setTranslation(CGPoint.zero, in: view)
@@ -372,4 +369,103 @@ extension NDImagePreviewViewController: UIScrollViewDelegate {
                 right: 0
         )
     }
+}
+
+
+// MARK: Extension CGRect
+extension CGRect {
+    /** Creates a rectangle with the given center and dimensions
+    - parameter center: The center of the new rectangle
+    - parameter size: The dimensions of the new rectangle
+     */
+    init(center: CGPoint, size: CGSize) {
+        self.init(x: center.x - size.width / 2, y: center.y - size.height / 2, width: size.width, height: size.height)
+    }
+
+    /** the coordinates of this rectangles center */
+    var center: CGPoint {
+        get {
+            return CGPoint(x: centerX, y: centerY)
+        }
+        set {
+            centerX = newValue.x; centerY = newValue.y
+        }
+    }
+
+    /** the x-coordinate of this rectangles center
+    - note: Acts as a settable midX
+    - returns: The x-coordinate of the center
+     */
+    var centerX: CGFloat {
+        get {
+            return midX
+        }
+        set {
+            origin.x = newValue - width * 0.5
+        }
+    }
+
+    /** the y-coordinate of this rectangles center
+     - note: Acts as a settable midY
+     - returns: The y-coordinate of the center
+     */
+    var centerY: CGFloat {
+        get {
+            return midY
+        }
+        set {
+            origin.y = newValue - height * 0.5
+        }
+    }
+
+    // MARK: - "with" convenience functions
+
+    /** Same-sized rectangle with a new center
+    - parameter center: The new center, ignored if nil
+    - returns: A new rectangle with the same size and a new center
+     */
+    func with(center: CGPoint?) -> CGRect {
+        return CGRect(center: center ?? self.center, size: size)
+    }
+
+    /** Same-sized rectangle with a new center-x
+    - parameter centerX: The new center-x, ignored if nil
+    - returns: A new rectangle with the same size and a new center
+     */
+    func with(centerX: CGFloat?) -> CGRect {
+        return CGRect(center: CGPoint(x: centerX ?? self.centerX, y: centerY), size: size)
+    }
+
+    /** Same-sized rectangle with a new center-y
+    - parameter centerY: The new center-y, ignored if nil
+    - returns: A new rectangle with the same size and a new center
+     */
+    func with(centerY: CGFloat?) -> CGRect {
+        return CGRect(center: CGPoint(x: centerX, y: centerY ?? self.centerY), size: size)
+    }
+
+    /** Same-sized rectangle with a new center-x and center-y
+    - parameter centerX: The new center-x, ignored if nil
+    - parameter centerY: The new center-y, ignored if nil
+    - returns: A new rectangle with the same size and a new center
+     */
+    func with(centerX: CGFloat?, centerY: CGFloat?) -> CGRect {
+        return CGRect(center: CGPoint(x: centerX ?? self.centerX, y: centerY ?? self.centerY), size: size)
+    }
+}
+
+
+// MARK: UICOlor Extension
+extension UIColor {
+
+    func setAlpha(alpha a: CGFloat) -> UIColor {
+        var red: CGFloat = 1.0
+        var green: CGFloat = 1.0
+        var blue: CGFloat = 1.0
+        var alpha: CGFloat = 1.0
+        self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+
+        return UIColor(red: red, green: green, blue: blue, alpha: a)
+    }
+
 }

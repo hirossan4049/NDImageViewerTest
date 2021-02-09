@@ -31,6 +31,7 @@ class NDImagePreviewHeaderDefaultView: NDImagePreviewHeaderView {
         let nib = UINib(nibName: "NDImagePreviewHeaderDefaultView", bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil).first as! UIView
         view.frame = frame
+        view.backgroundColor? = view.backgroundColor!.setAlpha(alpha: 0.5)
         self.addSubview(view)
     }
     
