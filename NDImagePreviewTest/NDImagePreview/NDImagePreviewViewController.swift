@@ -20,6 +20,12 @@ class NDImagePreviewViewController: UIViewController {
 
     var backImg: UIImageView?
 
+
+    public var images: [UIImage] = []
+    public var imageIndex: Int = 0
+
+
+
     var rightImg: UIImageView!
     var leftImg: UIImageView!
 
@@ -58,7 +64,7 @@ class NDImagePreviewViewController: UIViewController {
         transitionImageViewFrame = self.backImg!.superview!.convert(self.backImg!.frame, to: nil)
 
         imageView = UIImageView()
-        imageView.image = backImg!.image
+        imageView.image = images[imageIndex]
         imageView.frame = transitionImageViewFrame
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -86,20 +92,19 @@ class NDImagePreviewViewController: UIViewController {
         self.view.backgroundColor = .none
         self.view.addSubview(scrollView)
 
+
         rightImg = UIImageView()
-        rightImg!.image = UIImage(named: "geohot")
-        rightImg.frame = AVMakeRect(aspectRatio: rightImg.image!.size, insideRect: self.scrollView.bounds)
+//        rightImg!.image = UIImage(named: "geohot")
         rightImg.center.y = self.scrollView.center.y
-        rightImg.frame.origin.x = self.scrollView.frame.width
         view.addSubview(rightImg)
 
         leftImg = UIImageView()
-        leftImg!.image = UIImage(named: "geohot")
-        leftImg.frame = AVMakeRect(aspectRatio: leftImg.image!.size, insideRect: self.scrollView.bounds)
+//        leftImg!.image = UIImage(named: "geohot")
         leftImg.center.y = self.scrollView.center.y
-        leftImg.backgroundColor = .red
-        leftImg.frame.origin.x = -leftImg.frame.width
         view.addSubview(leftImg)
+
+        self.setLRImage()
+
 
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe))
         rightSwipe.direction = .right
@@ -134,7 +139,6 @@ class NDImagePreviewViewController: UIViewController {
 
     @objc func asahaPan(sender: UIPanGestureRecognizer) {
         let move: CGPoint = sender.translation(in: view)
-        print("move", move)
 
         if sender.state == .began {
             print("bigen-----------------------------")
@@ -213,27 +217,43 @@ class NDImagePreviewViewController: UIViewController {
 
     func imgSwipedAnimation(_ mode: ImageSwipeLR) {
         if mode == .right {
-            UIView.animate(withDuration: 0.3, animations: {
-                self.rightImg.frame.origin.x = 0
-                self.imageView.frame.origin.x = -(self.scrollView.frame.width + 20)
-            }, completion: { _ in
-                self.imageView.image = self.rightImg.image
-                self.imageView.frame = CGRect(x: 0, y: 0, width: self.rightImg.frame.width, height: self.rightImg.frame.height)
-                self.updateScrollInset()
-                self.rightImg.frame.origin.x = self.scrollView.frame.width
-                self.leftImg.frame.origin.x = -self.leftImg.frame.width
-            })
+            if self.rightImg.image != nil {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.rightImg.frame.origin.x = 0
+                    self.imageView.frame.origin.x = -(self.scrollView.frame.width + 20)
+                }, completion: { _ in
+                    self.imageView.frame = CGRect(x: 0, y: 0, width: self.rightImg.frame.width, height: self.rightImg.frame.height)
+                    self.imageView.image = self.rightImg.image
+                    self.imageIndex += 1
+                    self.setLRImage()
+                    self.updateScrollInset()
+                    self.rightImg.frame.origin.x = self.scrollView.frame.width
+                    self.leftImg.frame.origin.x = -self.leftImg.frame.width
+                })
+            }else{
+                UIView.animate(withDuration: 0.3, animations:{
+                    self.imageView.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.width, height: self.imageView.frame.height)
+                })
+            }
         } else if mode == .left {
-            UIView.animate(withDuration: 0.3, animations: {
-                self.leftImg.frame.origin.x = 0
-                self.imageView.frame.origin.x = self.scrollView.frame.width + 20
-            }, completion: { _ in
-                self.imageView.image = self.leftImg.image
-                self.imageView.frame = CGRect(x: 0, y: 0, width: self.leftImg.frame.width, height: self.leftImg.frame.height)
-                self.updateScrollInset()
-                self.rightImg.frame.origin.x = self.scrollView.frame.width
-                self.leftImg.frame.origin.x = -self.leftImg.frame.width
-            })
+            if self.leftImg.image != nil {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.leftImg.frame.origin.x = 0
+                    self.imageView.frame.origin.x = self.scrollView.frame.width + 20
+                }, completion: { _ in
+                    self.imageView.frame = CGRect(x: 0, y: 0, width: self.leftImg.frame.width, height: self.leftImg.frame.height)
+                    self.imageView.image = self.leftImg.image
+                    self.imageIndex -= 1
+                    self.setLRImage()
+                    self.updateScrollInset()
+                    self.rightImg.frame.origin.x = self.scrollView.frame.width
+                    self.leftImg.frame.origin.x = -self.leftImg.frame.width
+                })
+            }else{
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.imageView.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.width, height: self.imageView.frame.height)
+                })
+            }
         }
     }
 
@@ -243,6 +263,28 @@ class NDImagePreviewViewController: UIViewController {
             print("Right")
         } else if sender.direction == .left {
             print("Left")
+        }
+    }
+
+
+    func setLRImage(){
+        print(self.leftImg.image)
+        self.leftImg.image = self.images[safe: imageIndex - 1]
+        self.rightImg.image = self.images[safe: imageIndex + 1]
+
+        print(leftImg.frame.origin.x)
+        print(rightImg.frame.origin.x)
+
+
+        if leftImg.image != nil {
+            leftImg.frame = AVMakeRect(aspectRatio: leftImg.image!.size, insideRect: self.scrollView.bounds)
+            leftImg.frame.origin.x = -leftImg.frame.width
+            leftImg.center.y = scrollView.center.y
+        }
+        if rightImg.image != nil {
+            rightImg.frame = AVMakeRect(aspectRatio: rightImg.image!.size, insideRect: self.scrollView.bounds)
+            rightImg.frame.origin.x = self.scrollView.frame.width
+            rightImg.center.y = scrollView.center.y
         }
     }
 
@@ -673,3 +715,9 @@ extension UIImageView {
     }
 }
 
+// MARK: Array Extension safe
+extension Array {
+    subscript (safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+}

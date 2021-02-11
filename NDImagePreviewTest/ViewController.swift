@@ -30,6 +30,12 @@ class ViewController: UIViewController {
     @IBAction func imagetapped(_ sender: UIButton) {
         let vc = NDImagePreviewViewController()
         vc.backImg = sender.imageView
+        vc.images = [
+            UIImage(named: "geohot")!,
+            UIImage(named: "image1")!,
+            UIImage(named: "image2")!,
+            UIImage(named: "image3")!
+        ]
         vc.modalPresentationStyle = .overCurrentContext
         present(vc, animated: false)
     }

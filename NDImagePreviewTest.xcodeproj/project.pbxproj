@@ -17,6 +17,7 @@
 		E9A7609E25BA5ADC008F8E11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9A7609C25BA5ADC008F8E11 /* LaunchScreen.storyboard */; };
 		E9A760A825BA5AFC008F8E11 /* NDImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A760A625BA5AFC008F8E11 /* NDImagePreviewViewController.swift */; };
 		E9A760A925BA5AFC008F8E11 /* NDImagePreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9A760A725BA5AFC008F8E11 /* NDImagePreviewViewController.xib */; };
+		E9A8508A25D557AB0084A00C /* NDImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8508925D557AB0084A00C /* NDImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		E9A7609F25BA5ADC008F8E11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9A760A625BA5AFC008F8E11 /* NDImagePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NDImagePreviewViewController.swift; sourceTree = "<group>"; };
 		E9A760A725BA5AFC008F8E11 /* NDImagePreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NDImagePreviewViewController.xib; sourceTree = "<group>"; };
+		E9A8508925D557AB0084A00C /* NDImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NDImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,10 +66,6 @@
 		E9A7609025BA5ADA008F8E11 /* NDImagePreviewTest */ = {
 			isa = PBXGroup;
 			children = (
-				E94D01BF25D01CA700BC5F66 /* NDImagePreviewHeaderView.swift */,
-				E94D01C325D0471D00BC5F66 /* NDImagePreviewHeaderDefaultView.xib */,
-				E9A760A625BA5AFC008F8E11 /* NDImagePreviewViewController.swift */,
-				E9A760A725BA5AFC008F8E11 /* NDImagePreviewViewController.xib */,
 				E9A760AB25BA5B01008F8E11 /* NDImagePreview */,
 				E9A7609125BA5ADA008F8E11 /* AppDelegate.swift */,
 				E9A7609325BA5ADA008F8E11 /* SceneDelegate.swift */,
@@ -83,6 +81,11 @@
 		E9A760AB25BA5B01008F8E11 /* NDImagePreview */ = {
 			isa = PBXGroup;
 			children = (
+				E94D01BF25D01CA700BC5F66 /* NDImagePreviewHeaderView.swift */,
+				E94D01C325D0471D00BC5F66 /* NDImagePreviewHeaderDefaultView.xib */,
+				E9A760A625BA5AFC008F8E11 /* NDImagePreviewViewController.swift */,
+				E9A760A725BA5AFC008F8E11 /* NDImagePreviewViewController.xib */,
+				E9A8508925D557AB0084A00C /* NDImageView.swift */,
 			);
 			path = NDImagePreview;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9A8508A25D557AB0084A00C /* NDImageView.swift in Sources */,
 				E9A7609625BA5ADA008F8E11 /* ViewController.swift in Sources */,
 				E9A7609225BA5ADA008F8E11 /* AppDelegate.swift in Sources */,
 				E9A7609425BA5ADA008F8E11 /* SceneDelegate.swift in Sources */,
