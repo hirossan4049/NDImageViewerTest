@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f9f6156f-a98c-4d8e-bd68-efba37766bff" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/project.xcworkspace/xcuserdata/craptone.xcuserdatad/UserInterfaceState.xcuserstate" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/project.xcworkspace/xcuserdata/craptone.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NDImagePreviewTest/NDImagePreviewViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest/NDImagePreviewViewController.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +56,7 @@
       <workItem from="1611917944323" duration="912000" />
       <workItem from="1612833408990" duration="1483000" />
       <workItem from="1612947686965" duration="38000" />
-      <workItem from="1613029107877" duration="7168000" />
+      <workItem from="1613029107877" duration="7875000" />
     </task>
     <servers />
   </component>

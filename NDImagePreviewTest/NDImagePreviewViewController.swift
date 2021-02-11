@@ -43,7 +43,8 @@ class NDImagePreviewViewController: UIViewController {
     enum ImageMoveMode {
         case swipe, close
     }
-    enum ImageSwipeLR{
+
+    enum ImageSwipeLR {
         case left, right
     }
 
@@ -205,30 +206,35 @@ class NDImagePreviewViewController: UIViewController {
             imageView.center.y += move.y
         }
 
-//        switch imageMoveMode {
-//        case .left:
-//            imageView.center.x += move.x
-//            rightImg.frame.origin.x = imageView.frame.origin.x - imageView.frame.width
-//            break
-//        case .right:
-//            imageView.center.x += move.x
-//            rightImg.frame.origin.x = imageView.frame.origin.x + imageView.frame.width
-//            break
-//        case .close:
-//            imageView.center.x += move.x
-//            imageView.center.y += move.y
-//            break
-//        default:
-//            break
-//        }
-
         view.layoutIfNeeded()
         sender.setTranslation(CGPoint.zero, in: view)
 
     }
 
     func imgSwipedAnimation(_ mode: ImageSwipeLR) {
-
+        if mode == .right {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.rightImg.frame.origin.x = 0
+                self.imageView.frame.origin.x = -(self.scrollView.frame.width + 20)
+            }, completion: { _ in
+                self.imageView.image = self.rightImg.image
+                self.imageView.frame = CGRect(x: 0, y: 0, width: self.rightImg.frame.width, height: self.rightImg.frame.height)
+                self.updateScrollInset()
+                self.rightImg.frame.origin.x = self.scrollView.frame.width
+                self.leftImg.frame.origin.x = -self.leftImg.frame.width
+            })
+        } else if mode == .left {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.leftImg.frame.origin.x = 0
+                self.imageView.frame.origin.x = self.scrollView.frame.width + 20
+            }, completion: { _ in
+                self.imageView.image = self.leftImg.image
+                self.imageView.frame = CGRect(x: 0, y: 0, width: self.leftImg.frame.width, height: self.leftImg.frame.height)
+                self.updateScrollInset()
+                self.rightImg.frame.origin.x = self.scrollView.frame.width
+                self.leftImg.frame.origin.x = -self.leftImg.frame.width
+            })
+        }
     }
 
     @objc func didSwipe(sender: UISwipeGestureRecognizer) {
