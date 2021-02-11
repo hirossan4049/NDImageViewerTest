@@ -40,8 +40,11 @@ class NDImagePreviewViewController: UIViewController {
         }
     }
 
-    enum ImageMoveMode{
-        case left, right, close
+    enum ImageMoveMode {
+        case swipe, close
+    }
+    enum ImageSwipeLR{
+        case left, right
     }
 
 //    override var prefersStatusBarHidden: Bool {
@@ -135,16 +138,12 @@ class NDImagePreviewViewController: UIViewController {
         if sender.state == .began {
             print("bigen-----------------------------")
             isHeadViewHidden = true
-            if move.x != 0 || move.y == 0{
+            if move.x != 0 || move.y == 0 {
                 print("right or left")
                 imageSwipeMode = true
-                if move.x > 0{
-                    imageMoveMode = .left
-                }else{
-                    imageMoveMode = .right
-                }
+                imageMoveMode = .swipe
                 return
-            }else{
+            } else {
                 imageSwipeMode = false
                 imageMoveMode = .close
             }
@@ -156,39 +155,56 @@ class NDImagePreviewViewController: UIViewController {
                 self.scrollView.backgroundColor = .none
                 self.scrollView.setZoomScale(0.85, animated: false)
             })
-            
-        }else if sender.state == .changed{
+
+        } else if sender.state == .changed {
 //            print("changed")
-        }
-        else if sender.state == .ended {
+        } else if sender.state == .ended {
             let imgCntr = self.imageView!.superview!.convert(self.imageView!.frame, to: nil).center
             let saX = imgCntr.x - scrollView.center.x
             let saY = imgCntr.y - scrollView.center.y
 
             if abs(saX) > 30 || abs(saY) > 30 {
-                closeAnimation()
+                if imageMoveMode == .swipe {
+                    print(rightImg.frame.origin.x + rightImg.frame.width)
+                    print(leftImg.frame.origin.x)
+                    if (rightImg.frame.origin.x - rightImg.frame.width) > 0 {
+                        print("left")
+                        imgSwipedAnimation(.left)
+                    } else {
+                        print("right")
+                        imgSwipedAnimation(.right)
+                    }
+                } else {
+                    rightImg.frame.origin.x = self.scrollView.frame.width
+                    leftImg.frame.origin.x = -leftImg.frame.width
+                    closeAnimation()
+                }
             } else {
                 scrollView.minimumZoomScale = 1
                 UIView.animate(withDuration: 0.15, animations: {
                     self.scrollView.backgroundColor = .black
                     self.scrollView.setZoomScale(1, animated: false)
+                    self.imageView.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.width, height: self.imageView.frame.height)
+
+                    self.rightImg.frame.origin.x = self.scrollView.frame.width
+                    self.leftImg.frame.origin.x = -self.leftImg.frame.width
                 })
-                self.imageView.frame = CGRect(x: 0, y: 0, width: self.imageView.frame.width, height: self.imageView.frame.height)
                 updateScrollInset()
+
             }
 
             return
         }
 
-        if imageSwipeMode{
+        if imageSwipeMode {
             imageView.center.x += move.x
             rightImg.frame.origin.x = imageView.frame.origin.x + imageView.frame.width + 20
             leftImg.frame.origin.x = imageView.frame.origin.x - imageView.frame.width - 20
-        }else{
+        } else {
             imageView.center.x += move.x
             imageView.center.y += move.y
         }
-        
+
 //        switch imageMoveMode {
 //        case .left:
 //            imageView.center.x += move.x
@@ -211,12 +227,15 @@ class NDImagePreviewViewController: UIViewController {
 
     }
 
+    func imgSwipedAnimation(_ mode: ImageSwipeLR) {
+
+    }
+
     @objc func didSwipe(sender: UISwipeGestureRecognizer) {
         print("didSwipe")
         if sender.direction == .right {
             print("Right")
-        }
-        else if sender.direction == .left {
+        } else if sender.direction == .left {
             print("Left")
         }
     }
@@ -476,7 +495,7 @@ extension UIColor {
         var blue: CGFloat = 1.0
         var alpha: CGFloat = 1.0
         self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        
+
         return UIColor(red: red, green: green, blue: blue, alpha: a)
     }
 
@@ -487,7 +506,9 @@ extension UIImageView {
 
     private var aspectFitSize: CGSize? {
         get {
-            guard let aspectRatio = image?.size else { return nil }
+            guard let aspectRatio = image?.size else {
+                return nil
+            }
             let widthRatio = bounds.width / aspectRatio.width
             let heightRatio = bounds.height / aspectRatio.height
             let ratio = (widthRatio > heightRatio) ? heightRatio : widthRatio
@@ -500,21 +521,27 @@ extension UIImageView {
 
     var aspectFitFrame: CGRect? {
         get {
-            guard let size = aspectFitSize else { return nil }
+            guard let size = aspectFitSize else {
+                return nil
+            }
             return CGRect(origin: CGPoint(x: frame.origin.x + (bounds.size.width - size.width) * 0.5, y: frame.origin.y + (bounds.size.height - size.height) * 0.5), size: size)
         }
     }
 
     var aspectFitBounds: CGRect? {
         get {
-            guard let size = aspectFitSize else { return nil }
+            guard let size = aspectFitSize else {
+                return nil
+            }
             return CGRect(origin: CGPoint(x: bounds.size.width * 0.5 - size.width * 0.5, y: bounds.size.height * 0.5 - size.height * 0.5), size: size)
         }
     }
 
     private var aspectFillSize: CGSize? {
         get {
-            guard let aspectRatio = image?.size else { return nil }
+            guard let aspectRatio = image?.size else {
+                return nil
+            }
             let widthRatio = bounds.width / aspectRatio.width
             let heightRatio = bounds.height / aspectRatio.height
             let ratio = (widthRatio < heightRatio) ? heightRatio : widthRatio
@@ -527,20 +554,26 @@ extension UIImageView {
 
     var aspectFillFrame: CGRect? {
         get {
-            guard let size = aspectFillSize else { return nil }
+            guard let size = aspectFillSize else {
+                return nil
+            }
             return CGRect(origin: CGPoint(x: frame.origin.x - (size.width - bounds.size.width) * 0.5, y: frame.origin.y - (size.height - bounds.size.height) * 0.5), size: size)
         }
     }
 
     var aspectFillBounds: CGRect? {
         get {
-            guard let size = aspectFillSize else { return nil }
+            guard let size = aspectFillSize else {
+                return nil
+            }
             return CGRect(origin: CGPoint(x: bounds.origin.x - (size.width - bounds.size.width) * 0.5, y: bounds.origin.y - (size.height - bounds.size.height) * 0.5), size: size)
         }
     }
 
     func imageFrame(_ contentMode: UIView.ContentMode) -> CGRect? {
-        guard let image = image else { return nil }
+        guard let image = image else {
+            return nil
+        }
         switch contentMode {
         case .scaleToFill, .redraw:
             return frame
@@ -586,7 +619,9 @@ extension UIImageView {
     }
 
     func imageBounds(_ contentMode: UIView.ContentMode) -> CGRect? {
-        guard let image = image else { return nil }
+        guard let image = image else {
+            return nil
+        }
         switch contentMode {
         case .scaleToFill, .redraw:
             return bounds
