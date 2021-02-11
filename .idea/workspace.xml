@@ -2,20 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9f6156f-a98c-4d8e-bd68-efba37766bff" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest/Assets.xcassets/image4.imageset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NDImagePreviewTest/Assets.xcassets/image4.imageset/pexels-spencer-selover-428382.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/project.xcworkspace/xcuserdata/craptone.xcuserdatad/UserInterfaceState.xcuserstate" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest.xcodeproj/project.xcworkspace/xcuserdata/craptone.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NDImagePreviewTest/Base.lproj/Main.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest/Base.lproj/Main.storyboard" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NDImagePreviewTest/NDImagePreviewViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest/NDImagePreviewViewController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NDImagePreviewTest/ViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/NDImagePreviewTest/ViewController.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="iphonesimulator_5826998D-7DDC-4E8E-AFF9-8EB41E169F09" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="iphonesimulator_BECB4881-A4B8-4CC3-95B3-1DDED6F956F3" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -35,6 +31,8 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
   </component>
   <component name="RunManager">
@@ -58,6 +56,8 @@
       <updated>1611917942237</updated>
       <workItem from="1611917944323" duration="912000" />
       <workItem from="1612833408990" duration="1483000" />
+      <workItem from="1612947686965" duration="38000" />
+      <workItem from="1613029107877" duration="5506000" />
     </task>
     <servers />
   </component>

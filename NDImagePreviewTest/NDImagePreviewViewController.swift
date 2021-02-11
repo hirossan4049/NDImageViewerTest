@@ -10,6 +10,8 @@ import AVFoundation
 
 class NDImagePreviewViewController: UIViewController {
     private var transitionImageViewFrame: CGRect!
+    private var imageMoveMode: ImageMoveMode!
+    private var imageSwipeMode: Bool = false
 
     var imageView: UIImageView!
     var scrollView: UIScrollView!
@@ -17,6 +19,9 @@ class NDImagePreviewViewController: UIViewController {
     var isZoomLock = false
 
     var backImg: UIImageView?
+
+    var rightImg: UIImageView!
+    var leftImg: UIImageView!
 
     lazy var headView: UIView = {
         let view = NDImagePreviewHeaderDefaultView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIApplication.shared.statusBarFrame.height + 50))
@@ -33,6 +38,10 @@ class NDImagePreviewViewController: UIViewController {
                 self.isHeadViewHiddenFn(false)
             }
         }
+    }
+
+    enum ImageMoveMode{
+        case left, right, close
     }
 
 //    override var prefersStatusBarHidden: Bool {
@@ -58,6 +67,7 @@ class NDImagePreviewViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTap))
         imageView.addGestureRecognizer(tapGesture)
 
+
         scrollView = UIScrollView(frame: view.bounds)
 
         scrollView.delegate = self
@@ -72,11 +82,40 @@ class NDImagePreviewViewController: UIViewController {
         self.view.backgroundColor = .none
         self.view.addSubview(scrollView)
 
+        rightImg = UIImageView()
+        rightImg!.image = UIImage(named: "geohot")
+        rightImg.frame = AVMakeRect(aspectRatio: rightImg.image!.size, insideRect: self.scrollView.bounds)
+        rightImg.center.y = self.scrollView.center.y
+        rightImg.frame.origin.x = self.scrollView.frame.width
+        view.addSubview(rightImg)
+
+        leftImg = UIImageView()
+        leftImg!.image = UIImage(named: "geohot")
+        leftImg.frame = AVMakeRect(aspectRatio: leftImg.image!.size, insideRect: self.scrollView.bounds)
+        leftImg.center.y = self.scrollView.center.y
+        leftImg.backgroundColor = .red
+        leftImg.frame.origin.x = -leftImg.frame.width
+        view.addSubview(leftImg)
+
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe))
+        rightSwipe.direction = .right
+        scrollView.addGestureRecognizer(rightSwipe)
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe))
+        leftSwipe.direction = .left
+        scrollView.addGestureRecognizer(leftSwipe)
+
+        scrollView.delegate = self
+
+
         scrollView.backgroundColor = .none
 
         setupGesture()
 
 
+    }
+
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -91,9 +130,24 @@ class NDImagePreviewViewController: UIViewController {
 
     @objc func asahaPan(sender: UIPanGestureRecognizer) {
         let move: CGPoint = sender.translation(in: view)
-        
+        print("move", move)
+
         if sender.state == .began {
+            print("bigen-----------------------------")
             isHeadViewHidden = true
+            if move.x != 0 || move.y == 0{
+                print("right or left")
+                imageSwipeMode = true
+                if move.x > 0{
+                    imageMoveMode = .left
+                }else{
+                    imageMoveMode = .right
+                }
+                return
+            }else{
+                imageSwipeMode = false
+                imageMoveMode = .close
+            }
 
             scrollView.minimumZoomScale = 0.85
             self.imageView.layer.cornerRadius = 100
@@ -103,7 +157,10 @@ class NDImagePreviewViewController: UIViewController {
                 self.scrollView.setZoomScale(0.85, animated: false)
             })
             
-        }else if sender.state == .ended {
+        }else if sender.state == .changed{
+//            print("changed")
+        }
+        else if sender.state == .ended {
             let imgCntr = self.imageView!.superview!.convert(self.imageView!.frame, to: nil).center
             let saX = imgCntr.x - scrollView.center.x
             let saY = imgCntr.y - scrollView.center.y
@@ -122,14 +179,48 @@ class NDImagePreviewViewController: UIViewController {
 
             return
         }
+
+        if imageSwipeMode{
+            imageView.center.x += move.x
+            rightImg.frame.origin.x = imageView.frame.origin.x + imageView.frame.width + 20
+            leftImg.frame.origin.x = imageView.frame.origin.x - imageView.frame.width - 20
+        }else{
+            imageView.center.x += move.x
+            imageView.center.y += move.y
+        }
         
-        imageView.center.x += move.x
-        imageView.center.y += move.y
+//        switch imageMoveMode {
+//        case .left:
+//            imageView.center.x += move.x
+//            rightImg.frame.origin.x = imageView.frame.origin.x - imageView.frame.width
+//            break
+//        case .right:
+//            imageView.center.x += move.x
+//            rightImg.frame.origin.x = imageView.frame.origin.x + imageView.frame.width
+//            break
+//        case .close:
+//            imageView.center.x += move.x
+//            imageView.center.y += move.y
+//            break
+//        default:
+//            break
+//        }
 
         view.layoutIfNeeded()
         sender.setTranslation(CGPoint.zero, in: view)
 
     }
+
+    @objc func didSwipe(sender: UISwipeGestureRecognizer) {
+        print("didSwipe")
+        if sender.direction == .right {
+            print("Right")
+        }
+        else if sender.direction == .left {
+            print("Left")
+        }
+    }
+
 
     func isHeadViewHiddenFn(_ isHidden: Bool) {
         if isHidden {
